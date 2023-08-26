@@ -7,7 +7,7 @@ public class categoryOfItems {
     private String categoryName;
     private ArrayList<StoreItem> listOfItems;
 
-    
+
     public categoryOfItems(String name, StoreItem[] items) {
         categoryName=name;
         listOfItems=new ArrayList<>();
