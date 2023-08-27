@@ -87,6 +87,35 @@ public class StoreItem {
         return formattedDate.replaceAll("\\s+", "");
     }
 
+    /**
+     * сравнение на идентичность
+     * @param obj  товар для сравнения
+     * @return результат
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        StoreItem other = (StoreItem) obj;
+        if(other!=null){
+            return other.getPrice().equals(this.getPrice())&&other.getName().equals(this.getName());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        return result;
+    }
+
     @Override
     public String toString() {
         return "StoreItem{" + "name='" + name +
