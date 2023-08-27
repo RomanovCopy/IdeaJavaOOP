@@ -11,6 +11,23 @@ public class User {
         this.basket = new Basket();
     }
 
+    /**
+     * добавление товара в корзину
+     * @param category категория товара
+     * @param item товар
+     * @param numbers количество
+     */
+    public void addStoreItem(CategoryOfItems category, StoreItem item, int numbers){
+        if(basket==null){
+            basket=new Basket();
+        }
+        if(category.containsItem(item)){
+            if(category.removeItem(item, numbers)){
+                basket.addItem(item);
+            }
+        }
+    }
+
     public String getLogin() {
         return login;
     }
