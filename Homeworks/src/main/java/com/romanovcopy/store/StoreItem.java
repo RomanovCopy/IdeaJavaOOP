@@ -11,12 +11,32 @@ public class StoreItem {
     private BigDecimal price;
     private double rating;
     private String id;
+    private boolean isAvailable;
+
+
 
 
     public StoreItem( String name, BigDecimal price ){
         id = generationId();
         setName(name);
         setPrice(price);
+        isAvailable=true;
+    }
+
+    /**
+     * получение информации о доступности товара
+     * @return true - доступен, false - недоступен
+     */
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    /**
+     * установка доступности товара
+     * @param available true - доступен, false - недоступен
+     */
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     /**

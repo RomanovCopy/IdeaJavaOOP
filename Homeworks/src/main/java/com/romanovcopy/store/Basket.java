@@ -1,9 +1,9 @@
 package com.romanovcopy.store;
 
-
+import lombok.ToString;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.math.BigDecimal;
 
 public class Basket {
 
@@ -17,16 +17,19 @@ public class Basket {
     }
 
     /**
-     * Добавление товара
+     * Добавление товара выбранного наименования
      * @param item добавляемый товар
      */
     public void addItem(StoreItem item) {
-        items.put(item, items.getOrDefault(item, 0) + 1);
+        if(item.isAvailable()){
+            items.put(item, items.getOrDefault(item, 0) + 1);
+            item.setAvailable(false);
+        }
     }
 
     /**
-     * удаление товара
-     * @param item удаляемый товар
+     * удаление одной единицы выбранного наименования
+     * @param item выбранное наименование
      */
     public void removeItem(StoreItem item) {
         if (items.containsKey(item)) {
@@ -36,21 +39,42 @@ public class Basket {
             } else {
                 items.remove(item);
             }
+            item.setAvailable(true);
         } else {
             System.out.println("Товар не найден в корзине.");
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Товары в корзине:\n");
-        for (Map.Entry<StoreItem, Integer> entry : items.entrySet()) {
-            StoreItem item = entry.getKey();
-            int quantity = entry.getValue();
-            sb.append(item.getName()).append(" - ").append(item.getPrice()).append(" (Количество: ").append(quantity).append(")\n");
+    /**
+     * расчет общей стоимости товара в корзине
+     * @return общая стоимость товара в корзине
+     */
+    public BigDecimal calculateTotal() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (StoreItem item : items.keySet()) {
+            total = total.add(item.getPrice());
         }
-        return sb.toString();
+        return total;
     }
 
+    /**
+     * завершение покупки с очисткой корзины
+     */
+    public void checkout() {
+        BigDecimal total = calculateTotal();
+        System.out.println("Total: $" + total);
+        // Логика для обработки платежа и оформления заказа
+        // Например, отправка запроса на платежный шлюз и генерация номера заказа
+        System.out.println("Checkout completed!");
+        for (StoreItem item : items.keySet()) {
+            item.setAvailable(true);
+        }
+        items.clear();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Basket{" + "items=" + items + '}';
+    }
 }

@@ -1,14 +1,37 @@
 package com.romanovcopy.store;
 
+import java.math.BigDecimal;
+
 public class User {
     private String login;
     private String password;
     private Basket basket;
+    private BigDecimal personalAccount;
 
-    public User(String login, String password) {
+
+
+    public User(String login, String password, BigDecimal personalAccount) {
         this.login = login;
         this.password = password;
+        this.personalAccount=personalAccount;
         this.basket = new Basket();
+    }
+
+
+    /**
+     * личный счет покупателя
+     * @return сумма на личном счете
+     */
+    public BigDecimal getPersonalAccount() {
+        return personalAccount;
+    }
+
+    /**
+     * пополнение/снятие денежных средств
+     * @param amount сумма пополнения/снятия
+     */
+    public void topUpYourPersonalAccount(BigDecimal amount){
+        personalAccount += amount;
     }
 
     /**
