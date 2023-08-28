@@ -1,5 +1,6 @@
 package com.romanovcopy.store;
 
+
 import java.util.HashMap;
 
 public class CategoryOfItems {
@@ -17,6 +18,12 @@ public class CategoryOfItems {
         this.categoryName = categoryName;
     }
 
+    /**
+     * добавление товара
+     * @param item товар
+     * @param numbers количество
+     * @return  True - успешно, False - ошибка
+     */
     public boolean addItem(StoreItem item, int numbers){
         if(item!=null){
             if(listOfItems==null){
@@ -29,7 +36,7 @@ public class CategoryOfItems {
     }
 
     /**
-     * удаление/покупка товара
+     * удаление товара
      * @param item товар
      * @param numbers количество
      * @return  True - успешно, False - ошибка
@@ -45,7 +52,7 @@ public class CategoryOfItems {
                 System.out.println("Недостаточное количество товара.");
                 return false;
             }
-            if(listOfItems.get(item)==0){
+            if(listOfItems.get(item)<=0){
                 listOfItems.remove(item);
             }
             return true;
