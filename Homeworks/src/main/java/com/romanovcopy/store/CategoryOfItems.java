@@ -5,9 +5,13 @@ import java.util.HashMap;
 
 public class CategoryOfItems {
 
+
     private String categoryName;
     private HashMap<StoreItem, Integer> listOfItems;
 
+    public String getCategoryName() {
+        return categoryName;
+    }
 
     public CategoryOfItems(String name) {
         categoryName=name;
@@ -58,10 +62,31 @@ public class CategoryOfItems {
         return false;
     }
 
+    /**
+     * поиск товара по имени или части имени
+     * @param name имя или его часть
+     * @return ссылка на товар
+     */
+    public StoreItem search(String name){
+        StoreItem storeItem =null;
+        for(StoreItem item:listOfItems.keySet()){
+            if(item.getName().contains(name)){
+                return item;
+            }
+        }
+        return null;
+    }
 
     public boolean containsItem(StoreItem item){
         return listOfItems.containsKey(item);
     }
 
 
+    @Override
+    public String toString() {
+        return "CategoryOfItems{" +
+                "categoryName='" + categoryName + '\'' +
+                ", listOfItems=" + listOfItems +
+                '}';
+    }
 }

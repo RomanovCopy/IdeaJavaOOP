@@ -5,12 +5,15 @@ import com.romanovcopy.store.StoreItem;
 import com.romanovcopy.store.User;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 
 public class Main {
 
-
+    public static HashMap<String, CategoryOfItems>category;
 
     public static void main(String[] args) {
+
+        category=new HashMap<>();
 
         /*
           создание категорий и заполнение их товаром
@@ -28,6 +31,9 @@ public class Main {
         laptops.addItem(new StoreItem("Lenovo ThinkPad X1 Carbon", new BigDecimal(1400)),15);
         laptops.addItem(new StoreItem("Asus ZenBook Pro Duo", new BigDecimal(1450)),7);
 
+        category.put(smartphones.getCategoryName(),smartphones);
+        category.put(laptops.getCategoryName(),laptops);
+
         /*
          * создание пользователей/покупателей
          */
@@ -37,10 +43,15 @@ public class Main {
         User Max=new User("Max", "23456", new BigDecimal(10000));
 
         /*
+        все товары магазина
+         */
+        System.out.println(smartphones.toString());
+        System.out.println(laptops.toString());
+
+        /*
          * реализация покупок
          */
-
-
+//        Alex.addStoreItem(smartphones,category.get(smartphones.getCat);
 
 
 
