@@ -31,23 +31,28 @@ public class User {
      * @param amount сумма пополнения/снятия
      */
     public void topUpYourPersonalAccount(BigDecimal amount){
-        personalAccount += amount;
+        personalAccount = personalAccount.add(amount);
     }
 
     /**
      * добавление товара в корзину
      * @param category категория товара
      * @param item товар
-     * @param numbers количество
      */
-    public void addStoreItem(CategoryOfItems category, StoreItem item, int numbers){
+    public void addStoreItem(CategoryOfItems category, StoreItem item){
         if(basket==null){
             basket=new Basket();
         }
-        if(category.containsItem(item)){
-            if(category.removeItem(item, numbers)){
+        if(category.containsItem(item) && personalAccount.compareTo(item.getPrice())>=0){
+            if(category.removeItem(item)){
+                personalAccount=personalAccount.subtract(item.getPrice());
                 basket.addItem(item);
             }
+            else {
+                System.out.println("Товар недоступен к покупке.");
+            }
+        }else {
+            System.out.println("На Вашем счете недостаточно средств.");
         }
     }
 

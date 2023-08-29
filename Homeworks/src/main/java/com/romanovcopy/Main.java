@@ -32,9 +32,9 @@ public class Main {
          * создание пользователей/покупателей
          */
 
-        User Alex=new User("Alex","12345");
-        User Anna=new User("Anna", "23456");
-        User Max=new User("Max", "23456");
+        User Alex=new User("Alex","12345", new BigDecimal(10000));
+        User Anna=new User("Anna", "23456", new BigDecimal(10000));
+        User Max=new User("Max", "23456", new BigDecimal(10000));
 
         /*
          * реализация покупок

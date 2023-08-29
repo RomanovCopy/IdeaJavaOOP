@@ -38,17 +38,15 @@ public class CategoryOfItems {
     /**
      * удаление товара
      * @param item товар
-     * @param numbers количество
      * @return  True - успешно, False - ошибка
      */
-    public boolean removeItem(StoreItem item, int numbers){
+    public boolean removeItem(StoreItem item){
         int balanceOfGoods=0;
         if(listOfItems.containsKey(item)){
             balanceOfGoods=listOfItems.get(item);
-            if(balanceOfGoods>=numbers){
-                listOfItems.put(item, listOfItems.get(item) - numbers);
-            }
-            else {
+            if(balanceOfGoods>=1){
+                listOfItems.put(item, listOfItems.get(item) - 1);
+            } else {
                 System.out.println("Недостаточное количество товара.");
                 return false;
             }
