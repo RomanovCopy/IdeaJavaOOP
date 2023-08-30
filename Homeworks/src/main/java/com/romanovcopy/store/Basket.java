@@ -67,9 +67,9 @@ public class Basket {
         System.out.println("Всего: $" + total);
         if(user.topUpYourPersonalAccount(total.negate())){
             System.out.println("Платеж выполнен успешно!");
-            for(CategoryOfItems category: Main.category.values()){
+            for(CategoryOfItems category: Main.category){
                 for (StoreItem item : items) {
-                    if(category.containsItem(item)){
+                    if(category.search(item.getName())>0){
                         category.removeItem(item);
                     }
                 }

@@ -1,13 +1,14 @@
 package com.romanovcopy.store;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CategoryOfItems {
 
 
     private String categoryName;
-    private HashMap<StoreItem, Integer> listOfItems;
+    private HashMap<String, ArrayList<StoreItem>> listOfItems;
 
     public String getCategoryName() {
         return categoryName;
@@ -28,12 +29,16 @@ public class CategoryOfItems {
      * @param numbers количество
      * @return  True - успешно, False - ошибка
      */
-    public boolean addItem(StoreItem item, int numbers){
+    public boolean addItem(StoreItem item){
         if(item!=null){
-            if(listOfItems==null){
-                listOfItems=new HashMap<>();
+            item.setAvailable(true);
+            if(listOfItems.keySet().contains(item.getName())&&
+            !listOfItems.get(item.getName()).contains(item)){
+                listOfItems.get(item.getName()).add(item);
+            }else if(!listOfItems.keySet().contains(item.getName())) {
+                listOfItems.put(item.getName(),new ArrayList<>());
+                listOfItems.get(item.getName()).add(item);
             }
-            listOfItems.put(item, listOfItems.getOrDefault(item, 0) + numbers);
             return true;
         }
         return false;
@@ -44,41 +49,46 @@ public class CategoryOfItems {
      * @param item товар
      * @return  True - успешно, False - ошибка
      */
-    public boolean removeItem(StoreItem item){
-        int balanceOfGoods=0;
-        if(listOfItems.containsKey(item)){
-            balanceOfGoods=listOfItems.get(item);
-            if(balanceOfGoods>=1){
-                listOfItems.put(item, listOfItems.get(item) - 1);
-            } else {
-                System.out.println("Недостаточное количество товара.");
-                return false;
-            }
-            if(listOfItems.get(item)<=0){
-                listOfItems.remove(item);
-            }
-            return true;
+    public void removeItem(StoreItem item) {
+        if (listOfItems.containsKey(item.getName())) {
+            listOfItems.get(item.getName()).remove(item);
         }
-        return false;
     }
 
     /**
      * поиск товара по имени или части имени
+     *
      * @param name имя или его часть
-     * @return ссылка на товар
+     * @return количество данного товара
      */
-    public StoreItem search(String name){
-        StoreItem storeItem =null;
-        for(StoreItem item:listOfItems.keySet()){
-            if(item.getName().toLowerCase().contains(name.toLowerCase())){
-                return item;
+    public int search(String name) {
+        StoreItem storeItem = null;
+        int count=0;
+        for (String itemName : listOfItems.keySet()) {
+            if (itemName.toLowerCase().contains(name.toLowerCase())) {
+                for(StoreItem item:listOfItems.get(itemName)){
+                    if(item.isAvailable()){
+                        count++;
+                        System.out.println(item.getName());
+                    }
+                }
+                return count;
             }
         }
-        return null;
+        return -1;
     }
 
-    public boolean containsItem(StoreItem item){
-        return listOfItems.containsKey(item);
+    /**
+     * получение товара по точному наименованию
+     * @param model точное наименование
+     * @return искомый товар
+     */
+    public StoreItem getItem(String model){
+        for(StoreItem item : listOfItems.get(model)){
+            if(item.isAvailable())
+                return item;
+        }
+        return null;
     }
 
 

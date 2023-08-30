@@ -48,16 +48,8 @@ public class User {
         if(basket==null){
             basket=new Basket(this);
         }
-        if(category.containsItem(item) && personalAccount.compareTo(item.getPrice())>=0){
-            if(category.removeItem(item)){
-                personalAccount=personalAccount.subtract(item.getPrice());
+        if(category.search(item.getName())>0 ) {
                 basket.addItem(item);
-            }
-            else {
-                System.out.println("Товар недоступен к покупке.");
-            }
-        }else {
-            System.out.println("На Вашем счете недостаточно средств.");
         }
     }
 
