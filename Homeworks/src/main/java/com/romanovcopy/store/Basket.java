@@ -1,6 +1,9 @@
 package com.romanovcopy.store;
 
+import com.romanovcopy.Main;
 import lombok.ToString;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.math.BigDecimal;
@@ -10,10 +13,14 @@ public class Basket {
     /**
      * Содержит товар и его количество
      */
-    private Map<StoreItem, Integer> items;
+    private ArrayList<StoreItem> items;
+    private User user;
 
-    public Basket() {
-        items = new HashMap<>();
+    public Basket(User user) {
+        if(user!=null){
+            this.user=user;
+            items = new ArrayList<>();
+        }
     }
 
     /**
@@ -22,7 +29,7 @@ public class Basket {
      */
     public void addItem(StoreItem item) {
         if(item.isAvailable()){
-            items.put(item, items.getOrDefault(item, 0) + 1);
+            items.add(item);
             item.setAvailable(false);
         }
     }
@@ -32,13 +39,8 @@ public class Basket {
      * @param item выбранное наименование
      */
     public void removeItem(StoreItem item) {
-        if (items.containsKey(item)) {
-            int quantity = items.get(item);
-            if (quantity > 1) {
-                items.put(item, quantity - 1);
-            } else {
-                items.remove(item);
-            }
+        if (items.contains(item)) {
+            items.remove(item);
             item.setAvailable(true);
         } else {
             System.out.println("Товар не найден в корзине.");
@@ -49,9 +51,9 @@ public class Basket {
      * расчет общей стоимости товара в корзине
      * @return общая стоимость товара в корзине
      */
-    public BigDecimal calculateTotal() {
+    private BigDecimal calculateTotal() {
         BigDecimal total = BigDecimal.ZERO;
-        for (StoreItem item : items.keySet()) {
+        for (StoreItem item : items) {
             total = total.add(item.getPrice());
         }
         return total;
@@ -60,16 +62,23 @@ public class Basket {
     /**
      * завершение покупки с очисткой корзины
      */
-    public void checkout() {
+    public boolean checkout() {
         BigDecimal total = calculateTotal();
-        System.out.println("Total: $" + total);
-        // Логика для обработки платежа и оформления заказа
-        // Например, отправка запроса на платежный шлюз и генерация номера заказа
-        System.out.println("Checkout completed!");
-        for (StoreItem item : items.keySet()) {
-            item.setAvailable(true);
+        System.out.println("Всего: $" + total);
+        if(user.topUpYourPersonalAccount(total.negate())){
+            System.out.println("Платеж выполнен успешно!");
+            for(CategoryOfItems category: Main.category.values()){
+                for (StoreItem item : items) {
+                    if(category.containsItem(item)){
+                        category.removeItem(item);
+                    }
+                }
+            }
+            items.clear();
+            return true;
         }
-        items.clear();
+        System.out.println("Ошибка при проведении платежа");
+        return false;
     }
 
 

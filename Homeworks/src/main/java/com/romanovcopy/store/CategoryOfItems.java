@@ -70,7 +70,7 @@ public class CategoryOfItems {
     public StoreItem search(String name){
         StoreItem storeItem =null;
         for(StoreItem item:listOfItems.keySet()){
-            if(item.getName().contains(name)){
+            if(item.getName().toLowerCase().contains(name.toLowerCase())){
                 return item;
             }
         }

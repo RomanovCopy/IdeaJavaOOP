@@ -5,6 +5,7 @@ import com.romanovcopy.store.StoreItem;
 import com.romanovcopy.store.User;
 
 import java.math.BigDecimal;
+import java.net.SocketOption;
 import java.util.HashMap;
 
 public class Main {
@@ -51,8 +52,12 @@ public class Main {
         /*
          * реализация покупок
          */
-//        Alex.addStoreItem(smartphones,category.get(smartphones.getCat);
-
+        StoreItem apple=smartphones.search("apple");
+        if(apple!=null){
+            System.out.println("Найден :"+ apple.toString());
+            Alex.addStoreItem(smartphones, apple);
+            Alex.getBasket().checkout();
+        }
 
 
     }

@@ -14,7 +14,7 @@ public class User {
         this.login = login;
         this.password = password;
         this.personalAccount=personalAccount;
-        this.basket = new Basket();
+        this.basket = new Basket(this);
     }
 
 
@@ -30,8 +30,13 @@ public class User {
      * пополнение/снятие денежных средств
      * @param amount сумма пополнения/снятия
      */
-    public void topUpYourPersonalAccount(BigDecimal amount){
-        personalAccount = personalAccount.add(amount);
+    public boolean topUpYourPersonalAccount(BigDecimal amount){
+        var temp=personalAccount.add(amount);
+        if(temp.compareTo(BigDecimal.ZERO)>=0){
+            personalAccount = temp;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -41,7 +46,7 @@ public class User {
      */
     public void addStoreItem(CategoryOfItems category, StoreItem item){
         if(basket==null){
-            basket=new Basket();
+            basket=new Basket(this);
         }
         if(category.containsItem(item) && personalAccount.compareTo(item.getPrice())>=0){
             if(category.removeItem(item)){
