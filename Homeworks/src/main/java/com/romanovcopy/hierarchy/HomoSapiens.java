@@ -6,9 +6,17 @@ import com.romanovcopy.interfaces.Jumper;
 
 public class HomoSapiens extends Live implements Runnable, Jumper{
 
-    public HomoSapiens() {
-        super();
 
+    private String name;
+
+
+    public HomoSapiens(String name) {
+        super();
+        this.name=name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -19,5 +27,13 @@ public class HomoSapiens extends Live implements Runnable, Jumper{
     @Override
     public boolean jump(int height) {
         return height<=maximumHeight;
+    }
+    @Override
+    public String toString() {
+        return "HomoSapiens{" +
+                "name='" + name + '\'' +
+                ", maximumDistance=" + maximumDistance + " m."+
+                ", maximumHeight=" + maximumHeight + " sm."+
+                '}';
     }
 }

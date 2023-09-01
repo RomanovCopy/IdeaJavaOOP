@@ -1,13 +1,13 @@
 package com.romanovcopy.obstacles;
 
 public class Wall extends Obstacle {
-    private double height;
+    private int height;
 
-    public Wall(double height) {
+    public Wall(int height) {
         this.height = height;
     }
 
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 

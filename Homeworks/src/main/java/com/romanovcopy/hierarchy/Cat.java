@@ -6,8 +6,17 @@ import com.romanovcopy.interfaces.Jumper;
 
 public class Cat extends Live implements Runnable, Jumper {
 
-    public Cat() {
+    private String name;
+
+
+
+    public Cat( String name ) {
         super();
+        this.name=name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -18,5 +27,14 @@ public class Cat extends Live implements Runnable, Jumper {
     @Override
     public boolean run(int distance) {
         return distance<=maximumDistance;
+    }
+
+    @Override
+    public String toString() {
+        return "Cat{" +
+                "name='" + name + '\'' +
+                ", maximumDistance=" + maximumDistance + " m."+
+                ", maximumHeight=" + maximumHeight + " sm."+
+                '}';
     }
 }
