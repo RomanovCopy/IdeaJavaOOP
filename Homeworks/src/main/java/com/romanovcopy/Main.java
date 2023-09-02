@@ -2,6 +2,7 @@ package com.romanovcopy;
 
 import com.romanovcopy.hierarchy.*;
 import com.romanovcopy.interfaces.Jumper;
+import com.romanovcopy.interfaces.Runnable;
 import com.romanovcopy.obstacles.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class Main {
 
         /*
         создаем массив участников
+        максимальные значения преодолеваемых препятствий
+        задаются случайным образом
          */
         participants=new ArrayList<>();
 
@@ -39,6 +42,7 @@ public class Main {
 
         /*
         создаем массив препятствий
+        высота и дистанция задаются случайным образом
          */
 
         sportsDisciplines=new ArrayList<>();
@@ -60,13 +64,22 @@ public class Main {
         for(var obstacle:sportsDisciplines){
             System.out.println(obstacle.toString());
             for(var person:participants){
-                if(person.isAvailable()){
-                    if(obstacle instanceof Jumper){
-                        person.setAvailable (((Jumper)person).jump(((Wall)obstacle).getHeight()));
-                    }else {
-
+                if (person.isAvailable()) {
+                    if (obstacle instanceof Jumper && person instanceof Jumper) {
+                        person.setAvailable(((Jumper) person).jump(((Wall) obstacle).getHeight()));
+                    } else if (obstacle instanceof Treadmill && person instanceof Runnable) {
+                        person.setAvailable(((Runnable) person).run(((Treadmill) obstacle).getLength()));
+                    }
+                    if (!person.isAvailable()) {
+                        System.out.println("Выбыл из борьбы: " + person);
                     }
                 }
+            }
+        }
+        System.out.println("Дистанцию прошли : ");
+        for(var person:participants){
+            if(person.isAvailable()){
+                System.out.println(person.toString());
             }
         }
 
