@@ -5,15 +5,27 @@ import java.util.Random;
 
 public abstract class AbstractGame implements Game{
 
+    /**
+     * длина слова
+     */
     Integer sizeWord;
+    /**
+     * допустимое количество попыток
+     */
     Integer maxTry;
+    /**
+     * загаданное слово
+     */
     String word;
 
+    /**
+     * текущий статус игры
+     */
     GameStatus gameStatus=GameStatus.INIT;
 
 
     public String generateWord(){
-        return "";
+        return null;
     }
 
     abstract List<String> generateCharList(){
