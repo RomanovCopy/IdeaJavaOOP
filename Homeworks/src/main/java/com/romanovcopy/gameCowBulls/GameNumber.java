@@ -1,33 +1,21 @@
 package com.romanovcopy.gameCowBulls;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
-public class GameNumber implements AbstractGame{
-
-    @Override
-    public String generateWord() {
-        return super.generateWord();
-    }
+public class GameNumber extends AbstractGame{
 
     @Override
-    List<String> generateCharList() {
-        List<String>list=new ArrayList<>(){'0','1','2','3','4','5','6','7','8','9'};
-        return null;
-    }
-
-    @Override
-    public void start(Integer sizeWord, Integer maxTry) {
-        super.start(sizeWord, maxTry);
-    }
-
-    @Override
-    public Answer inputValue(String value) {
-        return super.inputValue(value);
-    }
-
-    @Override
-    public GameStatus getGameStatus() {
-        return super.getGameStatus();
+    String generateWord() {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < sizeWord; i++) {
+            int randomNumber = random.nextInt(10);
+            sb.append(randomNumber);
+        }
+        return sb.toString();
     }
 }

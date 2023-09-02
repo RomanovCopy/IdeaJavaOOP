@@ -2,82 +2,97 @@ package com.romanovcopy.gameCowBulls;
 
 import java.util.List;
 import java.util.Random;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public abstract class AbstractGame implements Game{
 
-    /**
-     * длина слова
-     */
     Integer sizeWord;
-    /**
-     * допустимое количество попыток
-     */
     Integer maxTry;
-    /**
-     * загаданное слово
-     */
     String word;
+    GameStatus gameStatus = GameStatus.INIT;
+
 
     /**
-     * текущий статус игры
+     * метод предзаполняет слова компьютера
+     * @return
      */
-    GameStatus gameStatus=GameStatus.INIT;
+    abstract String generateWord();
 
 
-    public String generateWord(){
-        return null;
-    }
+    /**
+     * считывание случайной строки из файла
+     * @param filePath абсолютный путь к файлу
+     * @param lineCount количество строк в файле
+     * @return случайная строка
+     */
+    protected String generateLine(String filePath, int lineCount){
+        try {
+            File file = new File(filePath);
+            Scanner scanner = new Scanner(file);
 
-    abstract List<String> generateCharList(){
-        List<String>alphavit=generateCharList();
-        Random r=new Random();
-        String result="";
-        for(int i=0;i<sizeWord;i++){
-            int index=r.nextInt(alphavit.size());
-            result=result.concat(alphavit.get(index));
-            alphavit.remove(index);
+            if (lineCount > 0) {
+                Random random = new Random();
+                int randomLineIndex = random.nextInt(lineCount) + 1;
+
+                // Сбрасываем сканнер и пропускаем строки до случайной строки
+                scanner = new Scanner(file);
+                for (int i = 1; i < randomLineIndex; i++) {
+                    scanner.nextLine();
+                }
+                // Считываем случайную строку
+                String randomLine = scanner.nextLine();
+                return randomLine;
+            } else {
+                System.out.println("Извини. Я забыл слова...");
+            }
+            scanner.close();
+            return null;
+        } catch (FileNotFoundException e) {
+            System.out.println("Ошибка считывания: " + e.getMessage());
+            return null;
         }
-        return result;
     }
+
 
     @Override
     public void start(Integer sizeWord, Integer maxTry) {
-        this.sizeWord=sizeWord;
-        this.maxTry=maxTry;
-        word=generateWord();
-        gameStatus=GameStatus.START;
 
+        this.sizeWord = sizeWord;
+        this.maxTry = maxTry;
+        this.word = generateWord();
+        gameStatus = GameStatus.START;
     }
 
     @Override
     public Answer inputValue(String value) {
         maxTry--;
-        int bulls=0;
-        int cows=0;
-        for(int i;i<word.length();i++){
-            if(word.charAt(i)==value.charAt(i)){
+        int bulls = 0;
+        int cows = 0;
+        for (int i = 0; i < word.length(); i++) {
+            if(word.charAt(i) == value.charAt(i)){
                 bulls++;
                 cows++;
-            } else  {
-                for(int j=0;j<word.length();j++){
-                    if(word.charAt(j)==value.charAt(i)){
+            } else{
+                for (int j = 0; j < word.length(); j++) {
+                    if(word.charAt(j) == value.charAt(i)){
                         cows++;
                     }
                 }
             }
         }
-        if(word.length()==bulls){
-            gameStatus=GameStatus.WINNER;
+        if(word.length() == bulls ){
+            gameStatus = GameStatus.WINNER;
         }
-        if(!maxTry==0 && gameStatus.equals(GameStatus.WINNER)){
-            gameStatus=GameStatus.LOSE;
+        if(maxTry == 0 && !gameStatus.equals(GameStatus.WINNER)){
+            gameStatus = GameStatus.LOSE;
         }
-        Answer answer=new Answer(value, bulls, cows);
-        return answer;
+        return new Answer(value,bulls,cows,maxTry);
     }
 
     @Override
     public GameStatus getGameStatus() {
-        return null;
+        return gameStatus;
     }
 }
