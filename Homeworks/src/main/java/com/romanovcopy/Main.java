@@ -28,10 +28,14 @@ public class Main {
                 System.out.print("Введи вариант слова : ");
                 if(scanner.hasNextLine()){
                     String scannerWord = scanner.nextLine();
-                    Answer answer = game.inputValue(scannerWord);
-                    System.out.printf("Введено %s \nBulls %d\nCows %d\nПопыток %d\n",
-                            answer.getUserInput(),answer.getBull(),answer.getCow(),
-                            answer.getMaxTry());
+                    if(scannerWord.length()>0 && !scannerWord.equals("")){
+                        Answer answer = game.inputValue(scannerWord);
+                        System.out.printf("Введено %s \nBulls %d\nCows %d\nПопыток %d\n",
+                                answer.getUserInput(),answer.getBull(),answer.getCow(),
+                                answer.getMaxTry());
+                    }else {
+                        game.setGameStatus(GameStatus.LOSE);
+                    }
                 }
             }
             if(game.getGameStatus().equals(GameStatus.LOSE)){

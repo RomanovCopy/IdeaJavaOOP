@@ -1,5 +1,6 @@
 package com.romanovcopy.gameCowBulls;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.io.File;
@@ -62,6 +63,8 @@ public abstract class AbstractGame implements Game{
         this.sizeWord = sizeWord;
         this.maxTry = maxTry;
         this.word = generateWord();
+        System.out.printf("Загадано слово состоящее из %d символов\n ",
+                this.word.length());
         gameStatus = GameStatus.START;
     }
 
@@ -71,15 +74,10 @@ public abstract class AbstractGame implements Game{
         int bulls = 0;
         int cows = 0;
         for (int i = 0; i < word.length(); i++) {
-            if(word.charAt(i) == value.charAt(i)){
+            if(word.contains(Character.toString(value.charAt(i)))&&word.charAt(i) == value.charAt(i)){
                 bulls++;
+            } else if (word.contains(Character.toString(value.charAt(i)))&&word.charAt(i) != value.charAt(i)) {
                 cows++;
-            } else{
-                for (int j = 0; j < word.length(); j++) {
-                    if(word.charAt(j) == value.charAt(i)){
-                        cows++;
-                    }
-                }
             }
         }
         if(word.length() == bulls ){
@@ -94,5 +92,29 @@ public abstract class AbstractGame implements Game{
     @Override
     public GameStatus getGameStatus() {
         return gameStatus;
+    }
+
+    @Override
+    public void setGameStatus(GameStatus status) {
+        gameStatus=status;
+    }
+
+    @Override
+    public boolean addLog(String log) {
+        try {
+            String date=LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            log=date+"***"+log;
+            File file = new File("src/main/java/com/romanovcopy/gameCowBulls/logs.txt");
+            String absolutePath = file.getAbsolutePath();
+            File file = new File(absolutePath,true);
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(log);
+            bufferedWriter.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println("Ошибка при записи в файл logs.txt: " + e.getMessage());
+            return false;
+        }
     }
 }

@@ -6,4 +6,6 @@ public interface Game {
     Answer inputValue(String value);
 
     GameStatus getGameStatus();
+    void setGameStatus(GameStatus status);
+    boolean addLog(String log);
 }
