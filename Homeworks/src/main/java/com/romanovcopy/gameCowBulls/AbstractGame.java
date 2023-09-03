@@ -1,10 +1,12 @@
 package com.romanovcopy.gameCowBulls;
 
+import com.romanovcopy.Main;
+
+import java.io.*;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public abstract class AbstractGame implements Game{
@@ -13,6 +15,7 @@ public abstract class AbstractGame implements Game{
     Integer maxTry;
     String word;
     GameStatus gameStatus = GameStatus.INIT;
+
 
 
     /**
@@ -66,26 +69,34 @@ public abstract class AbstractGame implements Game{
         System.out.printf("Загадано слово состоящее из %d символов\n ",
                 this.word.length());
         gameStatus = GameStatus.START;
+        String log="New Game: "+word+" maxTry: "+maxTry;
+        addLog(log);
     }
 
     @Override
     public Answer inputValue(String value) {
-        maxTry--;
         int bulls = 0;
         int cows = 0;
-        for (int i = 0; i < word.length(); i++) {
-            if(word.contains(Character.toString(value.charAt(i)))&&word.charAt(i) == value.charAt(i)){
-                bulls++;
-            } else if (word.contains(Character.toString(value.charAt(i)))&&word.charAt(i) != value.charAt(i)) {
-                cows++;
+        if(word.length()==value.length()){
+            maxTry--;
+            for (int i = 0; i < word.length(); i++) {
+                if(word.contains(Character.toString(value.charAt(i)))&&word.charAt(i) == value.charAt(i)){
+                    bulls++;
+                } else if (word.contains(Character.toString(value.charAt(i)))&&word.charAt(i) != value.charAt(i)) {
+                    cows++;
+                }
             }
+            if(word.length() == bulls ){
+                gameStatus = GameStatus.WINNER;
+            }
+            if(maxTry == 0 && !gameStatus.equals(GameStatus.WINNER)){
+                gameStatus = GameStatus.LOSE;
+            }
+        }else {
+            value="Длины слов не совпадают.";
         }
-        if(word.length() == bulls ){
-            gameStatus = GameStatus.WINNER;
-        }
-        if(maxTry == 0 && !gameStatus.equals(GameStatus.WINNER)){
-            gameStatus = GameStatus.LOSE;
-        }
+        String log="User Input: "+value+" Buls: "+bulls+" Cows: "+cows+" MaxTry: "+maxTry;
+        addLog(log);
         return new Answer(value,bulls,cows,maxTry);
     }
 
@@ -101,20 +112,15 @@ public abstract class AbstractGame implements Game{
 
     @Override
     public boolean addLog(String log) {
-        try {
             String date=LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            log=date+"***"+log;
-            File file = new File("src/main/java/com/romanovcopy/gameCowBulls/logs.txt");
-            String absolutePath = file.getAbsolutePath();
-            File file = new File(absolutePath,true);
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(log);
-            bufferedWriter.close();
+            log=date+"***"+log+"\n";
+            String path= Main.getPathToLogs();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(path,true))) {
+                writer.write(log);
+            } catch (IOException e) {
+                System.out.println("Ошибка при записи в файл: " + e.getMessage());
+                return false;
+            }
             return true;
-        } catch (IOException e) {
-            System.out.println("Ошибка при записи в файл logs.txt: " + e.getMessage());
-            return false;
         }
-    }
 }

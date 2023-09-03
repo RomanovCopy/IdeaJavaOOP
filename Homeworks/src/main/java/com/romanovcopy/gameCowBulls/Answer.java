@@ -41,6 +41,7 @@ public class Answer {
                 "userInput='" + userInput + '\'' +
                 ", bull=" + bull +
                 ", cow=" + cow +
+                ",maxTry"+ maxTry +
                 '}';
     }
 

@@ -7,5 +7,10 @@ public interface Game {
 
     GameStatus getGameStatus();
     void setGameStatus(GameStatus status);
+    /**
+     * запись лога в файл
+     * @param log текст лога
+     * @return результат записи: true - удачно; false - ошибка.
+     */
     boolean addLog(String log);
 }
