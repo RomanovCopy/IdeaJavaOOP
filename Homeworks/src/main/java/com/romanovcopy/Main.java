@@ -92,6 +92,9 @@ public class Main {
                     game=null;
                 }else {
                     game=(Game)selectMode(scanner);
+                    while (game==null&&!exit){
+                        game=(Game)selectMode(scanner);
+                    }
                 }
             }
             scanner.nextLine();

@@ -1,3 +1,10 @@
 2023-09-03 20:56***New Game: vodka maxTry: 5
 2023-09-03 20:57***User Input: Длины слов не совпадают. Buls: 0 Cows: 0 MaxTry: 5
 2023-09-03 20:57***User Input: qwert Buls: 0 Cows: 0 MaxTry: 4
+2023-09-03 21:28***New Game: restaurant maxTry: 5
+2023-09-03 21:29***User Input: Длины слов не совпадают. Buls: 0 Cows: 0 MaxTry: 5
+2023-09-03 21:29***User Input: restaurant Buls: 10 Cows: 0 MaxTry: 4
+2023-09-03 21:34***New Game: 683 maxTry: 3
+2023-09-03 21:34***User Input: 123 Buls: 1 Cows: 0 MaxTry: 2
+2023-09-03 21:34***User Input: 113 Buls: 1 Cows: 0 MaxTry: 1
+2023-09-03 21:35***User Input: 223 Buls: 1 Cows: 0 MaxTry: 0
