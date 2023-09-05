@@ -1,6 +1,6 @@
 package com.romanovcopy.studentView;
 
-import com.romanovcopy.userComparator.User;
+import com.romanovcopy.userComparator.*;
 
 import java.util.List;
 
