@@ -1,14 +1,18 @@
-package com.romanovcopy.userComparator;
+package org.example;
 
 public class User {
-    private String name;
-    private String surName;
-
-
-    public User(String name, String surName) {
-        this.name = name;
-        this.surName = surName;
+    public int getScore(){
+        if(this instanceof Student) {
+            return getScore();
+        } else {
+            return 0;
+        }
     }
+    public User(String name) {
+        this.name = name;
+    }
+
+    private String name;
 
     public String getName() {
         return name;
@@ -18,16 +22,10 @@ public class User {
         this.name = name;
     }
 
-    public String getSurName() {
-        return surName;
-    }
-
-    public void setSurName(String surName) {
-        this.surName = surName;
-    }
-
     @Override
     public String toString() {
-        return "User{" + "name='" + name + '\'' + ", surName='" + surName + '\'' + '}';
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }
