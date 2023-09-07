@@ -1,4 +1,4 @@
-package org.example;
+package com.romanovcopy.userComparator;
 
 public class Student extends User {
 
@@ -9,6 +9,10 @@ public class Student extends User {
         super(name);
         this.score = score;
         this.age = age;
+    }
+
+    public Student(String name) {
+        super(name);
     }
 
     public int getScore() {
@@ -35,7 +39,4 @@ public class Student extends User {
                 '}';
     }
 
-    public Student(String name) {
-        super(name);
-    }
 }

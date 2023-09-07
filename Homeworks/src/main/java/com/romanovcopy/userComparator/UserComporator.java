@@ -1,4 +1,4 @@
-package org.example;
+package com.romanovcopy.userComparator;
 
 import java.util.Comparator;
 

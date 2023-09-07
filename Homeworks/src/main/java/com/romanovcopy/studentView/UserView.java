@@ -1,6 +1,6 @@
-package Task2;
+package com.romanovcopy.studentView;
 
-import org.example.User;
+import com.romanovcopy.userComparator.User;
 
 import java.util.List;
 

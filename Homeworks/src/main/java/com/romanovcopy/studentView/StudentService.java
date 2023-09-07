@@ -1,6 +1,6 @@
-package Task2;
+package com.romanovcopy.studentView;
 
-import org.example.Student;
+import com.romanovcopy.userComparator.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,4 +22,10 @@ public class StudentService implements UserService<Student> {
         Student student = new Student(name,score,age);
         students.add(student);
     }
+
+    @Override
+    public void create(Student student) {
+        students.add(student);
+    }
+
 }
