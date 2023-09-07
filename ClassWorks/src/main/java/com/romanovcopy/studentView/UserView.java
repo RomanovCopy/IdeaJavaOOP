@@ -1,11 +1,9 @@
-package com.romanovcopy.studentView;
+package Task2;
 
-import com.romanovcopy.userComparator.*;
+import org.example.User;
 
 import java.util.List;
 
 public interface UserView<T extends User> {
-
     public void sendOnConsole(List<T> users);
-
 }
