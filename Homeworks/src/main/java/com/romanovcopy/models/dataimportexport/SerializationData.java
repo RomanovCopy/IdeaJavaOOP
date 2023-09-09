@@ -1,11 +1,13 @@
-package com.romanovcopy.models;
+package com.romanovcopy.models.dataimportexport;
 
-public class Serialization {
+import java.io.*;
 
-    public <T> void saveToFile(T object, String fileName) {
+public class SerializationData {
+
+    public <T> void saveToFile(T data, String fileName) {
         try (FileOutputStream fileOut = new FileOutputStream(fileName);
              ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
-            objectOut.writeObject(object);
+            objectOut.writeObject(data);
             System.out.println("Объект успешно сохранен в файл " + fileName);
         } catch (IOException e) {
             System.out.println("Ошибка при сохранении объекта: " + e.getMessage());
@@ -22,4 +24,5 @@ public class Serialization {
             System.out.println("Ошибка при считывании объекта: " + e.getMessage());
             return null;
         }
+    }
 }
