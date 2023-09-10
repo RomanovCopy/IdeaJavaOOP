@@ -59,4 +59,5 @@ public class Person implements Serializable {
     public void setPostalAddress(final PostalAddress postalAddress) {
         this.postalAddress = postalAddress;
     }
+
 }
