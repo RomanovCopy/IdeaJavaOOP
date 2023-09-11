@@ -2,6 +2,7 @@ package com.romanovcopy.models;
 
 import com.romanovcopy.base.Person;
 import com.romanovcopy.interfaces.ContactModel;
+import com.romanovcopy.views.ContactViewImpl;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,15 +13,18 @@ public class ContactModelImpl<T extends Person> implements ContactModel<T>, Seri
     private List<T> contacts;
 
     private Extension extension;
+    private ContactViewImpl<T> view;
+
 
     public ContactModelImpl() {
         contacts = new ArrayList<>();
+        this.view = new ContactViewImpl<>();
         extension=Extension.DAT;
     }
 
     @Override
-    public Extension getExtension() {
-        return this.extension;
+    public void getExtension() {
+        this.view.displayExtension(extension);
     }
 
     @Override
@@ -39,8 +43,8 @@ public class ContactModelImpl<T extends Person> implements ContactModel<T>, Seri
     }
 
     @Override
-    public List<T> getAllContacts() {
-        return contacts;
+    public void getAllContacts() {
+        this.view.displayContacts(contacts);
     }
     @Override
     public void saveContacts(String fileName) {

@@ -5,7 +5,7 @@ import com.romanovcopy.models.Extension;
 
 public interface ContactController<T extends Person> {
 
-    Extension getExtension();
+    void getExtension();
     void setExtension(Extension extension);
     void addContact(T contact);
     void removeContact(T contact);

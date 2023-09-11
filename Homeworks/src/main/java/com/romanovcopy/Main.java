@@ -18,16 +18,16 @@ public class Main {
         ContactControllerImpl<Contact>controlller=new ContactControllerImpl<>();
         controlller.addContact(new Contact("John","13243647"));
         controlller.addContact(new Contact("Jane","644859487"));
-//        ContactModelImpl<Contact> model = new ContactModelImpl<>();
-//        model.addContact(new Contact("John", "123456789"));
-//        model.addContact(new Contact("Jane", "987654321"));
+
 
         //установка расширения для загрузки и сохранения контактов
         controlller.setExtension(Extension.BIN);
-        System.out.println("Extension : " + controlller.getExtension());
+        System.out.print("Extension : ");
+        controlller.getExtension();
 
         controlller.setExtension(Extension.DAT);
-        System.out.println("Extension : " + controlller.getExtension());
+        System.out.print("Extension : ");
+        controlller.getExtension();
 
         // Сохранение контактов на диск с заданным расширением
         controlller.saveContacts("contacts");

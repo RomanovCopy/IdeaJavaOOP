@@ -12,12 +12,10 @@ import java.util.List;
 
 public class ContactControllerImpl<T extends Person> implements ContactController<T> {
     private ContactModelImpl<T> model;
-    private ContactViewImpl<T> view;
 
     public ContactControllerImpl( ) {
         super();
         this.model = new ContactModelImpl<>();
-        this.view = new ContactViewImpl<>();
     }
 
 
@@ -26,8 +24,8 @@ public class ContactControllerImpl<T extends Person> implements ContactControlle
         model.setExtension(extension);
     }
     @Override
-    public Extension getExtension(){
-        return model.getExtension();
+    public void getExtension(){
+        model.getExtension();
     }
 
     @Override
@@ -42,7 +40,7 @@ public class ContactControllerImpl<T extends Person> implements ContactControlle
 
     @Override
     public void getAllContacts() {
-        view.displayContacts(model.getAllContacts());
+        model.getAllContacts();
     }
 
     @Override
