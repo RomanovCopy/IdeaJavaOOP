@@ -1,9 +1,19 @@
 package com.romanovcopy.models;
 
-import com.romanovcopy.models.base.Person;
+import com.romanovcopy.base.Person;
 
-public class Contact extends Person {
-    public Contact(final String nick) {
-        super(nick);
+import java.io.Serializable;
+
+public class Contact extends Person implements Serializable {
+    public Contact(String name, String phoneNumber) {
+        super(name, phoneNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "name='" + getNick() + '\'' +
+                ", phoneNumber='" + getPhoneNumber() + '\'' +
+                '}';
     }
 }
