@@ -11,5 +11,7 @@ public interface ContactModel<T extends Person> {
     void setExtension(Extension extension);
     void addContact(T contact);
     void removeContact(T contact);
+    void saveContacts(String fileName);
+    void loadContacts(String fileName);
     List<T> getAllContacts();
 }

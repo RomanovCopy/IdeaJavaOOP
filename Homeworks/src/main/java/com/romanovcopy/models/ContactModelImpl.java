@@ -42,11 +42,7 @@ public class ContactModelImpl<T extends Person> implements ContactModel<T>, Seri
     public List<T> getAllContacts() {
         return contacts;
     }
-
-    /**
-     * сохранение контактов на диск
-     * @param fileName имя файла без расширения
-     */
+    @Override
     public void saveContacts(String fileName) {
         fileName=fileName+"."+extension;
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
@@ -56,11 +52,7 @@ public class ContactModelImpl<T extends Person> implements ContactModel<T>, Seri
             System.out.println("Ошибка при сохранении контактов: " + e.getMessage());
         }
     }
-
-    /**
-     * загрузка контактов с диска
-     * @param fileName имя файла без расширения
-     */
+    @Override
     public void loadContacts(String fileName) {
         fileName=fileName+"."+extension;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
