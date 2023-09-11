@@ -31,7 +31,9 @@ public class Main {
         model.loadContacts("contacts");
 
         // Получение всех контактов
-        List<Contact> contacts = model.getAllContacts();
+        for(Contact contact:model.getAllContacts()){
+            System.out.println(contact.toString());
+        }
     }
 
 }
