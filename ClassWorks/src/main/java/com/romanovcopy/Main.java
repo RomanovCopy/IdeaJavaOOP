@@ -2,7 +2,7 @@ package com.romanovcopy;
 
 
 import com.romanovcopy.classwork150923.adapter.*;
-import com.romanovcopy.classwork150923.factory.*;
+import com.romanovcopy.classwork150923.decoratorFactory.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,16 +15,20 @@ public class Main {
         // Есть библиотека сбора данных от датчиков. Все они были куплены в комплекте с этой библиотекой.
         // Поступил новый датчик от другой компании, интерфейс которого отличается от предыдущих.
         // Надо включить этот датчик в систему.
-            MeteoStore meteoDb = new MeteoStore();
+        MeteoStore meteoDb = new MeteoStore();
 
-            MeteoSensor ms200_1 = new MS200(1);
-            meteoDb.save(ms200_1);
-            // Здесь надо вызвать метод getData у класса ST500Info. Полученные данные отправить в метод save объекта meteoDb
-            meteoDb.save(new AdapterST500Info(new ST500Info().getData()));
+        MeteoSensor ms200_1 = new MS200(1);
+        meteoDb.save(ms200_1);
+        // Здесь надо вызвать метод getData у класса ST500Info. Полученные данные отправить в метод save объекта meteoDb
+        meteoDb.save(new AdapterST500Info(new ST500Info().getData()));
 
-        }
+    }
 
-        private static void factory(){
+    private static void factory() {
 
-        }
+// Создать логирование операций, для класса Calculator. Класс Calculator не должен изменится.
+        ICalculableFactory calculableFactory = new LogCalculableFactory(new ConsoleLogger());
+        ViewCalculator view = new ViewCalculator(calculableFactory);
+        view.run();
+    }
 }

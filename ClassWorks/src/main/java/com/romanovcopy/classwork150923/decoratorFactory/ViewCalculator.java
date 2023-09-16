@@ -1,4 +1,4 @@
-package com.romanovcopy.classwork150923.factory;
+package com.romanovcopy.classwork150923.decoratorFactory;
 
 import java.util.Scanner;
 

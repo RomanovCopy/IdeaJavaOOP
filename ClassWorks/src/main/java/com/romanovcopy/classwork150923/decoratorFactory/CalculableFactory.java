@@ -1,4 +1,4 @@
-package com.romanovcopy.classwork150923.factory;
+package com.romanovcopy.classwork150923.decoratorFactory;
 
 public class CalculableFactory implements ICalculableFactory {
     public Calculable create(int primaryArg) {
