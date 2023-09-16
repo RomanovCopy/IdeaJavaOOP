@@ -2,10 +2,10 @@ package com.romanovcopy.classwork150923.adapter;
 
 // Интерфейс дополнительного датчика 
 public interface SensorTemperature{
-	int identifier(); // идентификатор датчика
-	double temperature(); // температура датчика
-	int year();			 // Год
-	int day();			 // День года
-	int second();		 // Секунда дня
+	public int identifier(); // идентификатор датчика
+	public double temperature(); // температура датчика
+	public int year();			 // Год
+	public int day();			 // День года
+	public int second();		 // Секунда дня
 }
 	

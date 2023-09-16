@@ -3,7 +3,7 @@ package com.romanovcopy.classwork150923.adapter;
 // Класс, сохраняющий данные от метеодатчиков
 public class MeteoStore {
     // сохранение данных в базу
-    boolean save(MeteoSensor meteoSensor) {
+    public boolean save(MeteoSensor meteoSensor) {
         System.out.format("Saving data from sensor [%d] at %s%n temperature - %f ; humidity - %f ; pressure - %f \n\r",
 				meteoSensor.getId(),
 				meteoSensor.getDateTime(),
