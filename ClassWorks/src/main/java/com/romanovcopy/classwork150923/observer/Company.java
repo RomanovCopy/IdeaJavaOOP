@@ -1,4 +1,4 @@
-package jobagency;
+package com.romanovcopy.classwork150923.observer;
 
 import java.util.Random;
 

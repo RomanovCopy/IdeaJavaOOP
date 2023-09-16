@@ -3,11 +3,13 @@ package com.romanovcopy;
 
 import com.romanovcopy.classwork150923.adapter.*;
 import com.romanovcopy.classwork150923.decoratorFactory.*;
+import com.romanovcopy.classwork150923.observer.*;
 
 public class Main {
     public static void main(String[] args) {
 //        adapter();
-        factory();
+//        decoratorFactory();
+        observer();
     }
 
 
@@ -23,12 +25,29 @@ public class Main {
         meteoDb.save(new AdapterST500Info(new ST500Info().getData()));
 
     }
-
-    private static void factory() {
+    private static void decoratorFactory() {
 
 // Создать логирование операций, для класса Calculator. Класс Calculator не должен изменится.
         ICalculableFactory calculableFactory = new LogCalculableFactory(new ConsoleLogger());
         ViewCalculator view = new ViewCalculator(calculableFactory);
         view.run();
+    }
+    private static void observer() {
+        // Добавить нового наблюдателя, например Specialist, который будет наблюдать за Company
+        Publisher jobAgency = new JobAgency();
+        Company google = new Company(jobAgency, "Google", 50);
+        Company geekBrains = new Company(jobAgency, "GeekBrains", 100);
+        Student petrov = new Student("Petrov");
+        Master ivanov = new Master("Ivanov");
+        Junior sidorov = new Junior("Sidorov");
+        Povar peshkov = new Povar("Peshkov");
+        jobAgency.registerObserver(petrov);
+        jobAgency.registerObserver(ivanov);
+        jobAgency.registerObserver(sidorov);
+        jobAgency.registerObserver(peshkov);
+        for (int i = 0; i < 2; i++) {
+            google.needEmpoyee();
+            geekBrains.needEmpoyee();
+        }
     }
 }

@@ -1,4 +1,4 @@
-package jobagency;
+package com.romanovcopy.classwork150923.observer;
 
 // Студент, цепляется за любую работу, которая лучше текущей
 public class Student implements Observer {
