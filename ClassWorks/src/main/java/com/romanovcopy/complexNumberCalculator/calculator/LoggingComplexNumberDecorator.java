@@ -13,25 +13,25 @@ public class LoggingComplexNumberDecorator extends ComplexNumberDecorator {
 
     @Override
     public IComplexNumber add(IComplexNumber other) {
-        Logger.getLogger("Calculator").info("Performing addition operation");
+        logger.info("Performing addition operation");
         return super.add(other);
     }
 
     @Override
     public IComplexNumber subtract(IComplexNumber other) {
-        Logger.getLogger("Calculator").info("Performing subtraction operation");
+        logger.info("Performing subtraction operation");
         return super.subtract(other);
     }
 
     @Override
     public IComplexNumber multiply(IComplexNumber other) {
-        Logger.getLogger("Calculator").info("Performing multiplication operation");
+        logger.info("Performing multiplication operation");
         return super.multiply(other);
     }
 
     @Override
     public IComplexNumber divide(IComplexNumber other) {
-        Logger.getLogger("Calculator").info("Performing division operation");
+        logger.info("Performing division operation");
         return super.divide(other);
     }
 

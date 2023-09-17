@@ -65,6 +65,20 @@ public class ModelCalculator implements IModelCalculator {
 
         viewCalculator.message(builder.toString());
     }
+    @Override
+    public void printMessage(String message) {
+        viewCalculator.message(message);
+    }
+    @Override
+    public void printError(String errorMessage) {
+        viewCalculator.errorMessage(errorMessage);
+    }
+    @Override
+    public void close() {
+        viewCalculator.close();
+        System.exit(0);
+    }
+
 
     /**
      * определение и выполнение операции

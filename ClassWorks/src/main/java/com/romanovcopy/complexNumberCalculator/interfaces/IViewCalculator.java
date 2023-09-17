@@ -23,4 +23,9 @@ public interface IViewCalculator {
      * @param errorMessge сообщение об ошибке
      */
     public void errorMessage(String errorMessge);
+    /**
+     * завершение работы ViewCalculator
+     */
+    public void close();
+
 }

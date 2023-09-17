@@ -15,13 +15,13 @@ public class ViewCalculator implements IViewCalculator {
     @Override
     public String inputString(String message) {
         String input = "";
+        scanner.nextLine();
         if (message != null && message.length() > 0) {
             System.out.println(message);
         }
         if (scanner.hasNextLine()) {
             input = scanner.nextLine();
         }
-        scanner.nextLine();
         return input;
     }
     @Override
@@ -33,7 +33,7 @@ public class ViewCalculator implements IViewCalculator {
         if (scanner.hasNextDouble()) {
             input = scanner.nextDouble();
         }
-        scanner.nextLine();
+//        scanner.nextLine();
         return input;
     }
     @Override
@@ -44,5 +44,11 @@ public class ViewCalculator implements IViewCalculator {
     public void errorMessage(String errorMessge){
         System.out.println(errorMessge);
     }
-
+    @Override
+    public void close() {
+        if (scanner != null) {
+            scanner.close();
+        }
+        message("Программа успешно завершена.");
+    }
 }

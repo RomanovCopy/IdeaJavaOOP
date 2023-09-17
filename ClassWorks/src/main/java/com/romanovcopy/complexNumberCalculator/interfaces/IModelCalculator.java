@@ -27,6 +27,19 @@ public interface IModelCalculator {
      * @param complexNumber результат выполненной операции
      */
     public void printResult(IComplexNumber complexNumber);
-
+    /**
+     * вывод в консоль сообщения
+     * @param message сообщение
+     */
+    public void printMessage(String message);
+    /**
+     * вывод в консоль сообщения об ошибке
+     * @param errorMessage сообщение об ошибке
+     */
+    public void printError(String errorMessage);
+    /**
+     * завершение работы ModelCalculator
+     */
+    public void close();
 
 }
