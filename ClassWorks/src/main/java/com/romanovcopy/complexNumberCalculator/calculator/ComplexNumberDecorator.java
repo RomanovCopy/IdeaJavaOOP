@@ -1,5 +1,7 @@
 package com.romanovcopy.complexNumberCalculator.calculator;
 
+import com.romanovcopy.complexNumberCalculator.interfaces.IComplexNumber;
+
 import java.util.logging.Logger;
 
 public class ComplexNumberDecorator implements IComplexNumber {

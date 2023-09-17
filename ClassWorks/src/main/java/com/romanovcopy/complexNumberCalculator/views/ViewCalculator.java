@@ -1,8 +1,10 @@
 package com.romanovcopy.complexNumberCalculator.views;
 
+import com.romanovcopy.complexNumberCalculator.interfaces.IViewCalculator;
+
 import java.util.Scanner;
 
-public class ViewCalculator {
+public class ViewCalculator implements IViewCalculator {
 
     private Scanner scanner;
 
@@ -10,12 +12,7 @@ public class ViewCalculator {
         scanner=new Scanner(System.in);
     }
 
-
-    /**
-     * прием ввода строки от пользователя
-     * @param message сообщение пользователю
-     * @return сообщение пользователя
-     */
+    @Override
     public String inputString(String message) {
         String input = "";
         if (message != null && message.length() > 0) {
@@ -27,12 +24,7 @@ public class ViewCalculator {
         scanner.nextLine();
         return input;
     }
-
-    /**
-     * прием ввода числа от пользователя
-     * @param message сообщение пользователю
-     * @return число пользователя
-     */
+    @Override
     public Double inputDouble(String message) {
         double input = 0;
         if (message != null && message.length() > 0) {
@@ -44,19 +36,11 @@ public class ViewCalculator {
         scanner.nextLine();
         return input;
     }
-
-    /**
-     * сообщение пользователю без ввода
-     * @param message сообщение
-     */
+    @Override
     public void message(String message){
         System.out.println(message);
     }
-
-    /**
-     * сообщение пользователю об ошибке без ввода
-     * @param errorMessge сообщение об ошибке
-     */
+    @Override
     public void errorMessage(String errorMessge){
         System.out.println(errorMessge);
     }

@@ -5,7 +5,7 @@ package com.romanovcopy;
 //import com.romanovcopy.classwork150923.decoratorFactory.*;
 //import com.romanovcopy.classwork150923.observer.*;
 import com.romanovcopy.complexNumberCalculator.calculator.ComplexNumberFactory;
-import com.romanovcopy.complexNumberCalculator.calculator.IComplexNumber;
+import com.romanovcopy.complexNumberCalculator.interfaces.IComplexNumber;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.romanovcopy.complexNumberCalculator.calculator;
+package com.romanovcopy.complexNumberCalculator.interfaces;
 
 public interface IComplexNumber {
 

@@ -1,6 +1,8 @@
 package com.romanovcopy.complexNumberCalculator.calculator;
 
-public class ComplexNumber implements IComplexNumber{
+import com.romanovcopy.complexNumberCalculator.interfaces.IComplexNumber;
+
+public class ComplexNumber implements IComplexNumber {
 
     private double real;
     private double imaginary;
