@@ -1,4 +1,4 @@
-package com.romanovcopy.complexNumberCalculator;
+package com.romanovcopy.complexNumberCalculator.calculator;
 
 import java.util.logging.Logger;
 
