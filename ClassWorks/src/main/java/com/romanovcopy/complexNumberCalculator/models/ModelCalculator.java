@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Представляет бизнес-логику и данные приложения. Отвечает за доступ к данным, их
+ * обработку и валидацию. Не зависит от представления и контроллера.
+ */
 public class ModelCalculator implements IModelCalculator {
 
     private ViewCalculator viewCalculator;

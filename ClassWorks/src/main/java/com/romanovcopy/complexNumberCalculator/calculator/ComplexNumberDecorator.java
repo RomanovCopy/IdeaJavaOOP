@@ -1,19 +1,17 @@
 package com.romanovcopy.complexNumberCalculator.calculator;
 
 import com.romanovcopy.complexNumberCalculator.interfaces.IComplexNumber;
+import com.romanovcopy.complexNumberCalculator.utils.Logger;
 
-import java.util.logging.*;
 
 public class ComplexNumberDecorator implements IComplexNumber {
 
-    protected final Logger logger = Logger.getLogger("Calculator");
-    protected FileHandler fileHandler;
+    protected final Logger logger = ComplexNumberFactory.logger;
 
     protected IComplexNumber decoratedNumber;
 
     public ComplexNumberDecorator(IComplexNumber decoratedNumber) {
         this.decoratedNumber = decoratedNumber;
-        settingsLogger();
     }
 
     @Override
@@ -29,7 +27,6 @@ public class ComplexNumberDecorator implements IComplexNumber {
     public IComplexNumber add(IComplexNumber other) {
             IComplexNumber result = decoratedNumber.add(other);
             logger.info(decoratedNumber + " + " + other + " = " + result);
-            fileHandler.close();
             return result;
     }
 
@@ -59,22 +56,4 @@ public class ComplexNumberDecorator implements IComplexNumber {
         return decoratedNumber.toString();
     }
 
-    private void settingsLogger(){
-        logger.setUseParentHandlers(false);
-        try {
-            // Указываем путь к файлу логов
-            fileHandler = new FileHandler("log.txt");
-            logger.addHandler(fileHandler);
-
-            // Устанавливаем уровень логирования
-            logger.setLevel(Level.INFO);
-
-            // Создаем форматтер для логов
-            SimpleFormatter formatter = new SimpleFormatter();
-            fileHandler.setFormatter(formatter);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

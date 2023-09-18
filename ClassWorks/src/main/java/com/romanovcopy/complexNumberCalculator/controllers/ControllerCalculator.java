@@ -4,6 +4,10 @@ import com.romanovcopy.complexNumberCalculator.models.ModelCalculator;
 
 import java.util.Scanner;
 
+/**
+ * данный класс обрабатывает пользовательский ввод, вызывает соответствующие методы
+ * модели ( type: ModelCalculator ) для обработки данных и обновления состояния.
+ */
 public class ControllerCalculator {
     private ModelCalculator modelCalculator;
     private Scanner scanner;

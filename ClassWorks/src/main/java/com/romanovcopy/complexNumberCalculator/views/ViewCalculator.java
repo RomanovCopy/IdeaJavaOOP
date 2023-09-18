@@ -4,6 +4,11 @@ import com.romanovcopy.complexNumberCalculator.interfaces.IViewCalculator;
 
 import java.util.Scanner;
 
+/**
+ * Отвечает за отображение данных пользователю. Предоставляет пользовательский
+ * интерфейс, с помощью которого он может взаимодействовать с приложением.
+ * Получает данные от модели и отображает их в удобном для пользователя формате.
+ */
 public class ViewCalculator implements IViewCalculator {
 
     private Scanner scanner;
@@ -24,6 +29,7 @@ public class ViewCalculator implements IViewCalculator {
         }
         return input;
     }
+
     @Override
     public Double inputDouble(String message) {
         double input = 0;
